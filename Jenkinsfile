@@ -12,7 +12,6 @@ pipeline {
         stage('say hello') {
           steps {
             sh 'echo "say hello"'
-            sh 'skipDefaultCheckout(true)'
           }
         }
 
