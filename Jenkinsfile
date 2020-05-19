@@ -1,11 +1,17 @@
 pipeline {
   agent any
   stages {
-    stage('Parallel execution') {
+    stage('clone down') {
+      steps {
+        stash(name: 'code', excludes: '.git', allowEmpty: true)
+      }
+    }
+
+    stage('say hello') {
       parallel {
-        stage('Say hello') {
+        stage('say hello') {
           steps {
-            sh 'echo "hello world"'
+            sh 'echo "say hello"'
           }
         }
 
@@ -18,7 +24,6 @@ pipeline {
           }
           steps {
             sh 'ci/build-app.sh'
-            archiveArtifacts 'app/build/libs/'
           }
         }
 
